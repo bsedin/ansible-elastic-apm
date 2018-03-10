@@ -1,0 +1,21 @@
+apm-server:
+  host: '0.0.0.0:8200'
+
+{% if elastic_apm_kibana_enabled %}
+setup.kibana.host: '{{ elastic_apm_kibana_protocol }}://{% if elastic_apm_kibana_basic_auth_username %}{{ elastic_apm_kibana_basic_auth_username }}:{{ elastic_apm_kibana_basic_auth_password }}@{% endif %}{{ elastic_apm_kibana_host }}:{{ elastic_apm_kibana_port }}'
+setup.kibana.protocol: '{{ elastic_apm_kibana_protocol }}'
+setup.kibana.username: '{{ elastic_apm_kibana_basic_auth_username }}'
+setup,kibana.password: '{{ elastic_apm_kibana_basic_auth_password }}'
+setup.kibana.ssl.enabled: '{{ elastic_apm_kibana_protocol == "https" }}'
+setup.dashboards.enabled: {{ elastic_apm_kibana_setup_dashboards }}
+{% endif %}
+
+setup.template.enabled: '{{ elastic_apm_setup_template_enabled }}'
+
+output.elasticsearch:
+  hosts:
+    {{ elastic_apm_elasticsearch_hosts | to_yaml | indent(4) }}
+  compression_level: {{ elastic_apm_compression_level }}
+
+xpack.monitoring:
+  enabled: true

@@ -1,0 +1,24 @@
+---
+- name: ensure elastic apm dirs
+  file:
+    dest: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ elastic_apm_dir }}'
+
+- name: ensure elastic apm config
+  template:
+    src: apm-server.yml.j2
+    dest: '{{ elastic_apm_dir }}/apm-server.yml'
+
+- name: run elastic apm container
+  docker_container:
+    state: started
+    restart: yes
+    recreate: yes
+    name: '{{ elastic_apm_container_name }}'
+    image: '{{ elastic_apm_image }}:{{ elastic_apm_version }}'
+    restart_policy: always
+    links: '{{ elastic_apm_links }}'
+    volumes:
+      - '{{ elastic_apm_dir }}/apm-server.yml:/usr/share/apm-server/apm-server.yml'
