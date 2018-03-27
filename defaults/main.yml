@@ -1,4 +1,5 @@
 ---
+elastic_apm_beat_name: '{{ hostname }}'
 elastic_apm_version: 6.2.2
 elastic_apm_image: docker.elastic.co/apm/apm-server
 elastic_apm_container_name: elastic-apm
