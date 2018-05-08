@@ -20,5 +20,6 @@
     image: '{{ elastic_apm_image }}:{{ elastic_apm_version }}'
     restart_policy: always
     links: '{{ elastic_apm_links }}'
+    networks: '{{ elastic_apm_networks }}'
     volumes:
       - '{{ elastic_apm_dir }}/apm-server.yml:/usr/share/apm-server/apm-server.yml'

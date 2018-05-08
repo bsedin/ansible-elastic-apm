@@ -5,6 +5,7 @@ elastic_apm_image: docker.elastic.co/apm/apm-server
 elastic_apm_container_name: elastic-apm
 elastic_apm_dir: /opt/docker/services/elastic-apm
 elastic_apm_links: []
+elastic_apm_networks: []
 elastic_apm_elasticsearch_hosts:
   - localhost:9200
 elastic_apm_kibana_setup_dashboards: true
