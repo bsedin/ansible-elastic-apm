@@ -23,3 +23,5 @@
     networks: '{{ elastic_apm_networks }}'
     volumes:
       - '{{ elastic_apm_dir }}/apm-server.yml:/usr/share/apm-server/apm-server.yml'
+    env: '{{ elastic_apm_env }}'
+    published_ports: '{{ elastic_apm_published_ports }}'

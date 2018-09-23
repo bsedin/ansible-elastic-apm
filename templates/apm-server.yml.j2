@@ -2,6 +2,7 @@ name: '{{ elastic_apm_beat_name }}'
 
 apm-server:
   host: '0.0.0.0:8200'
+  {% if elastic_apm_secret_token is defined %}secret_token: {{ elastic_apm_secret_token }}{% endif%}
 
 {% if elastic_apm_kibana_enabled %}
 setup.kibana.host: '{{ elastic_apm_kibana_protocol }}://{% if elastic_apm_kibana_basic_auth_username %}{{ elastic_apm_kibana_basic_auth_username }}:{{ elastic_apm_kibana_basic_auth_password }}@{% endif %}{{ elastic_apm_kibana_host }}:{{ elastic_apm_kibana_port }}'
