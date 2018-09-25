@@ -14,11 +14,39 @@ setup.dashboards.enabled: {{ elastic_apm_kibana_setup_dashboards }}
 {% endif %}
 
 setup.template.enabled: '{{ elastic_apm_setup_template_enabled }}'
+setup.template.settings:
+  index:
+    number_of_shards: 1
+    codec: best_compression
 
 output.elasticsearch:
   hosts:
     {{ elastic_apm_elasticsearch_hosts | to_yaml | indent(4) }}
   compression_level: {{ elastic_apm_compression_level }}
+  indices:
+    - index: "apm-%{[beat.version]}-sourcemap"
+      when.contains:
+        processor.event: "sourcemap"
+
+    - index: "apm-%{[beat.version]}-error-%{+yyyy.MM.dd}"
+      when.contains:
+        processor.event: "error"
+
+    - index: "apm-%{[beat.version]}-transaction-%{+yyyy.MM.dd}"
+      when.contains:
+        processor.event: "transaction"
+
+    - index: "apm-%{[beat.version]}-span-%{+yyyy.MM.dd}"
+      when.contains:
+        processor.event: "span"
+
+    - index: "apm-%{[beat.version]}-metric-%{+yyyy.MM.dd}"
+      when.contains:
+        processor.event: "metric"
+
+    - index: "apm-%{[beat.version]}-onboarding-%{+yyyy.MM.dd}"
+      when.contains:
+        processor.event: "onboarding"
 
 xpack.monitoring:
   enabled: true

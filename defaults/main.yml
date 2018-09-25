@@ -17,5 +17,5 @@ elastic_apm_kibana_host: localhost
 elastic_apm_kibana_port: 5601
 elastic_apm_kibana_basic_auth_username:
 elastic_apm_kibana_basic_auth_password:
-elastic_apm_compression_level: 0
+elastic_apm_compression_level: 5
 elastic_apm_setup_template_enabled: true
