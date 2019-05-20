@@ -18,3 +18,27 @@ elastic_apm_kibana_basic_auth_username:
 elastic_apm_kibana_basic_auth_password:
 elastic_apm_compression_level: 5
 elastic_apm_setup_template_enabled: true
+elastic_apm_indices:
+  - index: "apm-7.0.0-sourcemap"
+    when.contains:
+      processor.event: "sourcemap"
+
+  - index: "apm-7.0.0-error"
+    when.contains:
+      processor.event: "error"
+
+  - index: "apm-7.0.0-transaction"
+    when.contains:
+      processor.event: "transaction"
+
+  - index: "apm-7.0.0-span"
+    when.contains:
+      processor.event: "span"
+
+  - index: "apm-7.0.0-metric"
+    when.contains:
+      processor.event: "metric"
+
+  - index: "apm-7.0.0-onboarding"
+    when.contains:
+      processor.event: "onboarding"

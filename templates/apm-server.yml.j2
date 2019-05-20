@@ -14,6 +14,8 @@ output.elasticsearch:
   hosts:
     {{ elastic_apm_elasticsearch_hosts | to_yaml | indent(4) }}
   compression_level: {{ elastic_apm_compression_level }}
+  indices:
+    {{ elastic_apm_indices | to_yaml | indent(4) }}
 
 xpack.monitoring:
   enabled: true
