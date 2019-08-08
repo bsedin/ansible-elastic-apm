@@ -4,6 +4,12 @@ apm-server:
   host: '0.0.0.0:8200'
   {% if elastic_apm_secret_token is defined %}secret_token: {{ elastic_apm_secret_token }}{% endif%}
 
+  max_event_size: {{ elastic_apm_max_event_size }}
+
+queue.mem.events: {{ elastic_apm_queue_mem_events }}
+
+max_procs: {{ elastic_apm_max_procs }}
+
 setup.template.enabled: '{{ elastic_apm_setup_template_enabled }}'
 setup.template.settings:
   index:
@@ -16,6 +22,8 @@ output.elasticsearch:
   compression_level: {{ elastic_apm_compression_level }}
   indices:
     {{ elastic_apm_indices | to_yaml | indent(4) }}
+  workers: {{ elastic_apm_output_elasticsearch_workers }}
+  bulk_max_size: {{ elastic_apm_output_elasticsearch_bulk_max_size }}
 
 xpack.monitoring:
   enabled: true

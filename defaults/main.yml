@@ -4,7 +4,6 @@ elastic_apm_version: 7.0.0
 elastic_apm_image: docker.elastic.co/apm/apm-server
 elastic_apm_container_name: elastic-apm
 elastic_apm_dir: /opt/docker/services/elastic-apm
-elastic_apm_links: []
 elastic_apm_env: {}
 elastic_apm_published_ports: []
 elastic_apm_networks: []
@@ -42,3 +41,9 @@ elastic_apm_indices:
   - index: "apm-7.0.0-onboarding"
     when.contains:
       processor.event: "onboarding"
+
+elastic_apm_max_procs: 4
+elastic_apm_queue_mem_events: 4096
+elastic_apm_max_event_size: 307200
+elastic_apm_output_elasticsearch_workers: 2
+elastic_apm_output_elasticsearch_bulk_max_size: 1024
