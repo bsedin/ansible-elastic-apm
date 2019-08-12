@@ -17,13 +17,16 @@ setup.template.settings:
     codec: best_compression
 
 output.elasticsearch:
-  hosts:
-    {{ elastic_apm_elasticsearch_hosts | to_yaml | indent(4) }}
+  hosts: {{ elastic_apm_elasticsearch_hosts | to_yaml }}
+  {% if elastic_apm_elasticsearch_username is defined %}username: {{ elastic_apm_elasticsearch_username }}{% endif%}
+
+  {% if elastic_apm_elasticsearch_password is defined %}password: {{ elastic_apm_elasticsearch_password }}{% endif%}
+
+  workers: {{ elastic_apm_output_elasticsearch_workers }}
+  bulk_max_size: {{ elastic_apm_output_elasticsearch_bulk_max_size }}
   compression_level: {{ elastic_apm_compression_level }}
   indices:
     {{ elastic_apm_indices | to_yaml | indent(4) }}
-  workers: {{ elastic_apm_output_elasticsearch_workers }}
-  bulk_max_size: {{ elastic_apm_output_elasticsearch_bulk_max_size }}
 
 xpack.monitoring:
   enabled: true
