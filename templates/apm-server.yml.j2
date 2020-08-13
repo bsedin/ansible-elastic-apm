@@ -6,6 +6,12 @@ apm-server:
 
   max_event_size: {{ elastic_apm_max_event_size }}
 
+  apm-server.kibana.enabled: {{ elastic_apm_kibana_enabled }}
+  apm-server.kibana.host: {{ elastic_apm_kibana_host }}
+  apm-server.kibana.protocol: {{ elastic_apm_kibana_protocol }}
+  apm-server.kibana.username: {{ elastic_apm_kibana_basic_auth_username }}
+  apm-server.kibana.password: {{ elastic_apm_kibana_basic_auth_password }}
+
 queue.mem.events: {{ elastic_apm_queue_mem_events }}
 
 max_procs: {{ elastic_apm_max_procs }}
